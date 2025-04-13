@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Hospital.Models.Appiontment>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Patient</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Doctor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.PatientName</td>
+                <td>@item.Date</td>
+                <td>@item.Time</td>
+                <td>@item.Doctor.Name</td>
+            </tr>
+        }
+       
+    </tbody>
+</table>

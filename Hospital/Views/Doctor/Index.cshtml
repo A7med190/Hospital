@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Hospital.Models.Doctor>
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Doctor Appointment Page</h1>
+           
+        </div>
+    </div>
+</header>
+<!-- Filter Section -->
+<section class="py-4 bg-light">
+    <div class="container px-4 px-lg-5">
+        <form action="/Doctor/Index"> 
+            <div class="row">
+                <!-- Category Filter -->
+                <div class="col-md-3">
+                    <select name="Specialization" class="form-select">
+                        <option>All Specialization</option>
+                        @{
+                            if (ViewData["Specialization"] is List<Doctor> Doctors)
+                            {
+                                foreach (var item in Doctors)
+                                {
+                                    if (item.Specialization == ViewBag.Specialization)
+                                    {
+                                        <option value="@item.Specialization" selected>@item.Specialization</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Specialization">@item.Specialization</option>
+                                    }
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+                <!-- Search by Name -->
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Search by" name="query" value="@ViewBag.query" />
+                </div>
+            </form>
+    </div>
+</section>
+
+
+<div class="container">
+    <div class="row">
+        @foreach(var item in Model)
+        {
+            <div class="card m-2" style="width: 18rem;">
+                <img src="~/images/@item.Img" style="height:300px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text"> @item.Specialization</p>
+                    <a href="/appointment/book/@item.Id" class="btn btn-primary">Book Appointment</a>
+                </div>
+            </div>
+        }
+
+    </div>
+    <!-- Pagination -->
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+
+                    @for (int i = 1; i <= ViewBag.TotalCountOfProduct; i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Home/Index?page=@i">@i</a></li>
+                    }
+
+                </ul>
+            </nav>
+        </div>
+</div>

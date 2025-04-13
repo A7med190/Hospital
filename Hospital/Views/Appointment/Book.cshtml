@@ -1,0 +1,45 @@
+﻿@model Hospital.Models.Doctor
+<div>
+    <h1> Complete Your Apoointment with Doctor: @Model.Name</h1>
+    <form  method="post">
+        <input type="hidden" readonly name="DoctorId" value="@Model.Id" class="form-control" />
+        <div class="mb-3">
+            <label for="PatientName" class="form-label">Patient Name</label>
+            <input type="text" name="PatientName" class="form-control" id="PatientName">
+        </div>
+        <div class="mb-3">
+            <label for="Date" class="form-label">Date</label>
+            <input type="date" name="Date" class="form-control" id="Date" >
+            
+        </div>
+        <div class="mb-3">
+            <label for="Time" class="form-label">Time</label>
+            <input type="Time" name="Time" class="form-control" id="Time" >
+
+        </div>
+        
+        
+        <button type="submit" class="btn btn-primary">Book</button>
+    </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const patientName = document.getElementById('PatientName').value;
+            const date = document.getElementById('Date').value;
+            const time = document.getElementById('Time').value; 
+            
+            if (!patientName || !date || !time) {
+                alert('Please fill in all fields!');
+                e.preventDefault();
+                return;
+            }
+
+            
+            const isConfirmed = confirm('Are you sure you want to book the appointment?');
+            if (!isConfirmed) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+</div>
